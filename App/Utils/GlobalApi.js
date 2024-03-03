@@ -1,46 +1,71 @@
-import { request, gql } from 'graphql-request'
+import { request, gql } from "graphql-request";
 
-const MASTER_URL="https://api-us-east-1-shared-usea1-02.hygraph.com/v2/clqpdgtas0qi901t6aj3ygmrg/master"
+const MASTER_URL =
+  "https://us-east-1-shared-usea1-02.cdn.hygraph.com/content/clt25xufe1kqa08vw029stn7y/master";
 
-const getSlider=async()=>{
-    const query = gql`
+const getSlider = async () => {
+  const query = gql`
     query GetSlider {
-        sliders {
-          id
-          name
-          image {
-            url
-          }
+      sliders {
+        id
+        name
+        image {
+          url
         }
       }
-      
-  `
- const result= await request(MASTER_URL, query);
- return result;
-}
+    }
+  `;
+  const result = await request(MASTER_URL, query);
+  return result;
+};
 
-
-const getCategories=async()=>{
-    const query=gql`
+const getCategories = async () => {
+  const query = gql`
     query GetCategory {
-        categories {
-          id
-          name
-          icon {
-            url
-          }
+      categories {
+        id
+        name
+        icon {
+          url
         }
       }
-      `
+    }
+  `;
 
-      const result= await request(MASTER_URL, query);
-      return result;
-}
+  const result = await request(MASTER_URL, query);
+  return result;
+};
 
-const getBusinessList=async()=>{
-  const query=gql`
+const getBusinessList = async () => {
+  const query = gql`
+    query getBusinessList {
+      businessLists {
+        id
+        name
+        email
+        contactPerson
+        category {
+          name
+        }
+        address
+        about
+        images {
+          url
+        }
+      }
+    }
+  `;
+  const result = await request(MASTER_URL, query);
+  return result;
+};
+
+const getBusinessListByCategory = async (category) => {
+  const query =
+    gql`
   query getBusinessList {
-    businessLists {
+    businessLists(where: {category: {name: "` +
+    category +
+    `"}}) {
       id
       name
       email
@@ -55,46 +80,34 @@ const getBusinessList=async()=>{
       }
     }
   }
-  `
-  const result= await request(MASTER_URL, query);
+  `;
+  const result = await request(MASTER_URL, query);
   return result;
-}
+};
 
-const getBusinessListByCategory=async(category)=>{
-  const query=gql`
-  query getBusinessList {
-    businessLists(where: {category: {name: "`+category+`"}}) {
-      id
-      name
-      email
-      contactPerson
-      category {
-        name
-      }
-      address
-      about
-      images {
-        url
-      }
-    }
-  }
-  `
-  const result= await request(MASTER_URL, query);
-  return result;
-}
-
-const createBooking=async(data)=>{
-  const mutationQuery=gql`
+const createBooking = async (data) => {
+  const mutationQuery =
+    gql`
   mutation createBooking {
     createBooking(
       data: {
         bookingStatus: Booked, 
         businessList: {
-          connect: {id: "`+data.businessId+`"}}, 
-        date: "`+data.date+`", 
-        time: "`+data.time+`", 
-        userEmail: "`+data.userEmail+`", 
-        userName: "`+data.userName+`"}
+          connect: {id: "` +
+    data.businessId +
+    `"}}, 
+        date: "` +
+    data.date +
+    `", 
+        time: "` +
+    data.time +
+    `", 
+        userEmail: "` +
+    data.userEmail +
+    `", 
+        userName: "` +
+    data.userName +
+    `"}
     ) {
       id
     }
@@ -102,16 +115,19 @@ const createBooking=async(data)=>{
       count
     }
   }
-  `
-  const result= await request(MASTER_URL, mutationQuery);
+  `;
+  const result = await request(MASTER_URL, mutationQuery);
   return result;
-}
+};
 
-const getUserBookings=async(userEmail)=>{
-  const query=gql`
+const getUserBookings = async (userEmail) => {
+  const query =
+    gql`
   query GetUserBookings {
     bookings(orderBy: updatedAt_DESC, 
-      where: {userEmail: "`+userEmail+`"}) {
+      where: {userEmail: "` +
+    userEmail +
+    `"}) {
       time
       userEmail
       userName
@@ -134,17 +150,17 @@ const getUserBookings=async(userEmail)=>{
       }
     }
   }
-  `
+  `;
 
-  const result= await request(MASTER_URL, query);
+  const result = await request(MASTER_URL, query);
   return result;
-}
+};
 
-export default{
-    getSlider,
-    getCategories,
-    getBusinessList,
-    getBusinessListByCategory,
-    createBooking,
-    getUserBookings
-}
+export default {
+  getSlider,
+  getCategories,
+  getBusinessList,
+  getBusinessListByCategory,
+  createBooking,
+  getUserBookings,
+};
