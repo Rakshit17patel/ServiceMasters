@@ -16,7 +16,7 @@ export default function TabNavigation() {
         headerShown:false,
         tabBarActiveTintColor:Colors.PRIMARY
     }}>
-       <Tab.Screen name='home' component={HomeNavigation}
+       <Tab.Screen name='home-tab' component={HomeNavigation}
        options={{
         tabBarLabel:({color})=>(
             <Text style={{color:color,fontSize:12,marginTop:-7}}>
@@ -27,7 +27,7 @@ export default function TabNavigation() {
         )
        }}
        /> 
-       <Tab.Screen name='booking' component={BookingNavigation} 
+       <Tab.Screen name='booking-tab' component={BookingNavigation} 
        options={{
         tabBarLabel:({color})=>(
             <Text style={{color:color,fontSize:12,marginTop:-7}}>

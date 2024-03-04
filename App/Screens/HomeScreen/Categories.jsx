@@ -19,9 +19,12 @@ export default function Categories() {
             setCategories(resp?.categories);
         })
     }
+    const viewAll=
+      ()=>{navigation.navigate('category-view-all',categories)}
+    
   return (
     <View style={{marginTop:10}}>
-      <Heading text={'Categories'} isViewAll={true} />
+      <Heading text={'Categories'} isViewAll={true}   onPress={viewAll}/>
       <FlatList
       data={categories}
       numColumns={4}
