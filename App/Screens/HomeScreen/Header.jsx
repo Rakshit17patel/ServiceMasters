@@ -1,10 +1,12 @@
-import { View, Text, Image, StyleSheet, TextInput } from 'react-native'
-import React from 'react'
+import { View, Text, Image, StyleSheet, TextInput, TouchableOpacity  } from 'react-native'
+import React,  { useState } from 'react'
 import { useUser } from '@clerk/clerk-expo'
 import Colors from '../../Utils/Colors';
 import { FontAwesome } from '@expo/vector-icons';
-export default function Header() {
+export default function Header({search}) {
     const {user,isLoading}=useUser();
+    const [text,onChangeText] =useState();
+    console.log(text);
   return user&&(
     <View style={styles.container}>
         {/* Profile Section  */}
@@ -24,10 +26,16 @@ export default function Header() {
         {/* Search Bar Section  */}
         <View style={styles.searchBarContainer}>
             <TextInput placeholder='Search'
-            style={styles.textInput}/>
+            style={styles.textInput}
+            text={text}
+            onChangeText={onChangeText}/>
+            <TouchableOpacity  onPress={()=>{search(text)}}>
+
             <FontAwesome name="search"
             style={styles.searchbtn}
              size={24} color={Colors.PRIMARY} />
+                         </TouchableOpacity >
+
         </View>
     </View>
   )
