@@ -1,19 +1,28 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import React from 'react'
 import Header from './Header'
 import Slider from './Slider'
 import Categories from './Categories'
 import BusinessList from './BusinessList'
-import { ScrollView } from 'react-native'
+import {useNavigation} from '@react-navigation/native';
+
+
 
 export default function HomeScreen() {
+  const navigation=useNavigation();
+
+  const search =(keyword)=>{
+      navigation.navigate('business-view-all',keyword);
+  }
+  
   return (
     <>
-      <Header/>
+          {/* Header  */}
+
+      <Header search={search}/>
 
     <ScrollView
     showsVerticalScrollIndicator={false}>
-      {/* Header  */}
       <View style={{padding:20}}>
         {/* Slider  */}
         <Slider/>

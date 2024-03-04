@@ -6,6 +6,7 @@ import BusinessListByCategoryScreen from '../Screens/BusinesListByCategoryScreen
 import BusinessDetailsScreen from '../Screens/BusinessDetailsScreen/BusinessDetailsScreen';
 import CategoryViewAll from '../Screens/CategoryViewAllScreen/CategoryViewAll';
 import Login from '../Screens/LoginScreen/Login';
+import BusinessListViewAll from '../Screens/HomeScreen/BusinessListViewAll';
 
 const Stack = createStackNavigator();
 export default function HomeNavigation() {
@@ -19,7 +20,8 @@ export default function HomeNavigation() {
         component={BusinessListByCategoryScreen}/>
         <Stack.Screen name='business-detail' component={BusinessDetailsScreen} />
         <Stack.Screen name='category-view-all' component={CategoryViewAll} />
-                    {/* <Stack.Screen name='login' component={Login} /> */}
+        <Stack.Screen name='business-view-all' component={BusinessListViewAll} />
+
 
 
    </Stack.Navigator>
