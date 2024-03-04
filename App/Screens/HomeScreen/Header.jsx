@@ -22,13 +22,13 @@ export default function Header() {
             color="white" />
         </View>
         {/* Search Bar Section  */}
-        {/* <View style={styles.searchBarContainer}>
+        <View style={styles.searchBarContainer}>
             <TextInput placeholder='Search'
             style={styles.textInput}/>
             <FontAwesome name="search"
             style={styles.searchbtn}
              size={24} color={Colors.PRIMARY} />
-        </View> */}
+        </View>
     </View>
   )
 }
